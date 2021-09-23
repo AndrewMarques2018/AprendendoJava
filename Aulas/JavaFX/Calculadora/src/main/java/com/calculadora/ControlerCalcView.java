@@ -1,13 +1,25 @@
 package com.calculadora;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+import java.net.URL;
 import java.util.Locale;
+import java.util.ResourceBundle;
 
-public class ControlerCalcView {
+public class ControlerCalcView implements Initializable {
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        Constraints.setTextFieldDouble(txtNumber1);
+        Constraints.setTextFieldDouble(txtNumber2);
+        Constraints.setTextFieldMaxLength(txtNumber1, 8);
+        Constraints.setTextFieldMaxLength(txtNumber2, 8);
+    }
 
     @FXML
     private TextField txtNumber1;
