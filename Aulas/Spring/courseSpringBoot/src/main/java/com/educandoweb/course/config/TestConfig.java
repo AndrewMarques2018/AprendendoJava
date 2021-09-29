@@ -1,11 +1,15 @@
 package com.educandoweb.course.config;
 
+import java.time.Instant;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
+
+import com.educandoweb.course.entits.Order;
 import com.educandoweb.course.entits.User;
+import com.educandoweb.course.repositories.OrderRepository;
 import com.educandoweb.course.repositories.UserRepository;
 
 @Configuration
@@ -13,13 +17,22 @@ public class TestConfig implements CommandLineRunner{
 
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private OrderRepository OrderRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
 		
-		User u1 = new User( (long) 2, "Jose2", "Jose2@gmail.com", "988888888", "123456");
+		User u1 = new User( null, "user1", "user2@gmail.com", "988888888", "123456");
+		User u2 = new User( null, "user2", "user2@gmail.com", "988888888", "123456");
+		
+		Order o1 = new Order(null, Instant.parse("2019-06-20T19:53:07Z"), u1);
+		Order o2 = new Order(null, Instant.parse("2019-07-21T03:42:10Z"), u2);
+		Order o3 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), u1);
 	
-		userRepository.saveAll(Arrays.asList(u1));
+		userRepository.saveAll(Arrays.asList(u1, u2));
+		OrderRepository.saveAll(Arrays.asList(o1, o2, o3));
 	}
 	
 	
