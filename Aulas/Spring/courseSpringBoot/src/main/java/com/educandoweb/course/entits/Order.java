@@ -13,14 +13,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.educandoweb.course.entits.enuns.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "tb_order")
@@ -59,6 +57,16 @@ public class Order implements Serializable{
 		this.client = client;
 	}
 
+	public Double getTotal () {
+	
+		double sum = 0.0;
+		for (OrderItem orderItem : items) {
+			sum += orderItem.getSubTotal();
+			
+		}
+		return sum;
+	}
+	
 	public Long getId() {
 		return id;
 	}
